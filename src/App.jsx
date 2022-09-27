@@ -1,6 +1,6 @@
 const App = () => (
   <div>
-    <h1 className="">Hello World</h1>
+    <h1 className="font-poppins">Hi</h1>
   </div>
 );
 
