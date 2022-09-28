@@ -1,5 +1,5 @@
-import { createContext, useEffect } from 'react';
-import { db } from '../firebase/config';
+import { createContext, useEffect, useReducer } from 'react';
+import { auth } from '../firebase/config';
 
 export const AuthContext = createContext();
 
@@ -18,11 +18,11 @@ export const authReducer = (state, action) => {
 };
 
 // this component wraps around entire app
-export const AuthContextProvider = () => {
+export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, { user: null, authIsReady: false });
 
   useEffect(() => {
-    const unsub = db.onAuthStateChanged((user) => {
+    const unsub = auth.onAuthStateChanged((user) => {
       dispatch({ type: 'AUTH_IS_READY', payload: user });
       unsub();
     });
