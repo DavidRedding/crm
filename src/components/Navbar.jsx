@@ -5,8 +5,12 @@ const Navbar = () => (
   <div className="w-full py-8 mb-20 text-[#333]">
     <ul className="flex items-center justify-between">
       <li className="flex items-center mr-auto">
-        <img className="mr-2 -mt-2 w-9" src={temple} alt="logo" />
-        <span className="font-semibold">The Dojo</span>
+        <Link to="/">
+          <img className="mr-2 -mt-2 w-9" src={temple} alt="logo" />
+        </Link>
+        <Link to="/">
+          <span className="font-semibold">The Dojo</span>
+        </Link>
       </li>
 
       <li>
