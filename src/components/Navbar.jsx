@@ -2,7 +2,7 @@ import temple from '../assets/temple.svg';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => (
-  <div className="w-full py-8 mb-20 text-[#333]">
+  <nav className="w-full py-8 mb-20 text-[#333]">
     <ul className="flex items-center justify-between">
       <li className="flex items-center mr-auto">
         <Link to="/">
@@ -27,7 +27,7 @@ const Navbar = () => (
         </button>
       </li>
     </ul>
-  </div>
+  </nav>
 );
 
 export default Navbar;
