@@ -4,12 +4,13 @@ import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import Create from './pages/create/Create';
 import Project from './pages/project/Project';
+import Navbar from './components/Navbar';
 
 const App = () => (
-  <div className="flex">
+  <div className="flex font-poppins">
     <Router>
-      <div className="bg-blue-300 px-14 grow">
-        {/* Navbar Component */}
+      <div className="bg-var-bg px-14 grow">
+        <Navbar />
         <Switch>
           <Route exact path="/">
             <Dashboard />

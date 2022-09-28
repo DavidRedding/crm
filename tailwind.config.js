@@ -12,6 +12,7 @@ module.exports = {
         var: {
           prim: '#8d69f1',
           high: '#d13267',
+          bg: '#f5f5f5',
         },
       },
     },
