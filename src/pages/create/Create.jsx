@@ -1,5 +1,5 @@
 const Create = () => {
-  return;
+  return <div>Create</div>;
 };
 
 export default Create;
