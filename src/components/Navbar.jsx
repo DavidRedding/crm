@@ -18,11 +18,11 @@ const Navbar = () => (
       </li>
 
       <li className="ml-3">
-        <Link to="/signup">Signup</Link>
+        <Link to="/signup">Sign up</Link>
       </li>
 
       <li className="ml-3">
-        <button className="px-2 py-1 bg-white border-2 rounded-[.25rem] text-var-prim border-var-prim hover:text-white hover:bg-var-prim">
+        <button className="px-2 p-1 bg-white border rounded-[.25rem] text-var-prim border-var-prim hover:text-white hover:bg-var-prim">
           Logout
         </button>
       </li>
