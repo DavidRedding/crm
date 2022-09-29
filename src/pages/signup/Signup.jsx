@@ -1,6 +1,5 @@
 import { useState } from 'react';
-
-// import { useSignup } from '../../hooks/useSignup';
+import { useSignup } from '../../hooks/useSignup';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -8,10 +7,12 @@ const Signup = () => {
   const [displayName, setDisplayName] = useState('');
   const [thumbnail, setThumbnail] = useState(null);
   const [thumbnailError, setThumbnailError] = useState(null);
+  const { signup, error, isPending } = useSignup();
 
   const handleFileChange = (e) => {
     setThumbnail(null);
     const selected = e.target.files[0];
+    console.log(selected);
 
     if (!selected) {
       setThumbnailError('Please choose a file');
@@ -28,7 +29,7 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password, displayName, thumbnail);
+    signup(email, password, displayName, thumbnail);
   };
 
   return (
@@ -44,7 +45,6 @@ const Signup = () => {
           required
         />
       </label>
-
       <label className="space-y-1">
         <span>password:</span>
         <input
@@ -55,7 +55,6 @@ const Signup = () => {
           required
         />
       </label>
-
       <label className="space-y-1">
         <h1>display name:</h1>
         <input
@@ -66,7 +65,6 @@ const Signup = () => {
           required
         />
       </label>
-
       <label className="space-y-1">
         <h1>profile thumbnail:</h1>
         <input
@@ -79,17 +77,28 @@ const Signup = () => {
         {thumbnailError && <span className="block font-semibold text-red-500">{thumbnailError}</span>}
       </label>
 
+      {/* Error with thumbnail */}
       {thumbnailError && (
         <button disabled className="w-1/4 p-1 text-gray-400 border border-gray-400 rounded-sm">
           Sign Up
         </button>
       )}
 
-      {!thumbnailError && (
+      {/* Signup Pending */}
+      {!thumbnailError && isPending ? (
+        <button disabled className="w-1/4 p-1 text-gray-400 border border-gray-400 rounded-sm">
+          Loading...
+        </button>
+      ) : null}
+
+      {/* Regular State */}
+      {!thumbnailError && !isPending ? (
         <button className="w-1/4 p-1 border rounded-sm border-var-prim text-var-prim hover:text-white hover:bg-var-prim">
           Sign Up
         </button>
-      )}
+      ) : null}
+
+      {error && <span className="block font-semibold text-red-500">{error}</span>}
     </form>
   );
 };

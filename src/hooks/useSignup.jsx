@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { db, storage } from '../firebase/config';
+import { auth, storage } from '../firebase/config';
 import { useAuthContext } from '../hooks/useAuthContext';
 
 export const useSignup = () => {
@@ -8,13 +8,13 @@ export const useSignup = () => {
   const [isPending, setIsPending] = useState(false);
   const { dispatch } = useAuthContext();
 
-  const signup = async (displayName, email, password, thumbnail) => {
+  const signup = async (email, password, displayName, thumbnail) => {
     setError(null);
     setIsPending(true);
 
     try {
       // signup in firebase
-      const res = await db.createUserWithEmailAndPassword(email, password);
+      const res = await auth.createUserWithEmailAndPassword(email, password);
 
       // if there is no res at all (ex. connnectivity issues)
       if (!res) {
@@ -23,7 +23,8 @@ export const useSignup = () => {
 
       // ref returns a reference for the given path
       // put uploads thumbnail to this reference's location + returns obj
-      const upload = await storage.ref(`thumbnails/${res.user.uid}/${thumbnail.name}`).put(thumbnail);
+      const uploadPath = `thumbnails/${res.user.uid}/${thumbnail.name}`;
+      const upload = await storage.ref(uploadPath).put(thumbnail);
       const uploadURL = await upload.ref.getDownloadURL();
 
       // add display name to user
