@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { db } from '../firebase/config';
+import { db, storage } from '../firebase/config';
 import { useAuthContext } from '../hooks/useAuthContext';
 
 export const useSignup = () => {
@@ -8,7 +8,7 @@ export const useSignup = () => {
   const [isPending, setIsPending] = useState(false);
   const { dispatch } = useAuthContext();
 
-  const signup = async (displayName, email, password) => {
+  const signup = async (displayName, email, password, thumbnail) => {
     setError(null);
     setIsPending(true);
 
@@ -21,8 +21,13 @@ export const useSignup = () => {
         throw new Error('Could not complete signup');
       }
 
+      // ref returns a reference for the given path
+      // put uploads thumbnail to this reference's location + returns obj
+      const upload = await storage.ref(`thumbnails/${res.user.uid}/${thumbnail.name}`).put(thumbnail);
+      const uploadURL = await upload.ref.getDownloadURL();
+
       // add display name to user
-      await res.user.updateProfile({ displayName });
+      await res.user.updateProfile({ displayName, photoURL: uploadURL });
 
       // login locally
       dispatch({ type: 'LOGIN', payload: res.user });
