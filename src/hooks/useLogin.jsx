@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { db } from '../firebase/config';
+import { auth, db } from '../firebase/config';
 import { useAuthContext } from '../hooks/useAuthContext';
 
 const useLogin = () => {
   const [isCancelled, setIsCancelled] = useState(false);
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
-  const { dispatch } = useAuthContext();
+  const { dispatch, user } = useAuthContext();
 
   const login = async (email, password) => {
     setError(null);
@@ -14,8 +14,11 @@ const useLogin = () => {
 
     try {
       // signs the user into firebase
-      const res = await db.signInWithEmailAndPassword(email, password);
+      const res = await auth.signInWithEmailAndPassword(email, password);
       console.log(res.user);
+
+      // online status
+      await db.collection('users').doc(res.user.uid).update({ online: true });
 
       // signs the user into local state
       dispatch({ type: 'LOGIN', payload: res.user });

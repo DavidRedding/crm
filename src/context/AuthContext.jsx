@@ -28,8 +28,8 @@ export const AuthContextProvider = ({ children }) => {
     });
   }, []);
 
-  console.log('AuthContext state:', state.user);
-  console.log('AuthState:', state.authIsReady);
+  // console.log('AuthContext state:', state.user);
+  // console.log('AuthState:', state.authIsReady);
 
   return <AuthContext.Provider value={{ ...state, dispatch }}>{children}</AuthContext.Provider>;
 };

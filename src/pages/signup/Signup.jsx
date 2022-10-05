@@ -33,7 +33,7 @@ const Signup = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col max-w-sm p-4 mx-auto space-y-5 bg-white border shadow-lg">
+    <form onSubmit={handleSubmit} className="flex flex-col max-w-sm p-8 mx-auto space-y-5 bg-white border shadow-lg">
       <h2 className="text-xl font-bold">Sign up</h2>
       <label className="space-y-1">
         <span>email:</span>
