@@ -14,14 +14,13 @@ import { useAuthContext } from './hooks/useAuthContext';
 
 const App = () => {
   const { user, authIsReady } = useAuthContext();
-  console.log(user);
   // prettier-ignore
   return (
     <div className="flex font-poppins">
       {authIsReady && (
         <Router>
-          <Sidebar />
-          <div className="bg-var-bg px-14 grow">
+          {user && <Sidebar />}
+          <div className="min-h-screen bg-var-bg px-14 grow">
             <Navbar user={user} />
             <Switch>
               <Route exact path="/">{user ? <Dashboard /> : <Redirect to="/login" />} </Route>
