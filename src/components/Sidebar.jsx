@@ -7,8 +7,8 @@ import Avatar from './Avatar';
 const Sidebar = ({ user }) => {
   const path = useLocation().pathname;
   return (
-    <div className="w-[300px] min-w-[300px] bg-var-prim min-h-screen relative text-white">
-      <div className="fixed w-[300px] min-w-[300px]">
+    <div className="relative min-h-screen text-white w-72 bg-var-prim">
+      <div className="fixed w-72">
         <div className="py-10 font-bold text-center border-b border-gray-200 px-7 ">
           <Avatar src={user.photoURL} />
           <p>Hey {user.displayName}</p>
