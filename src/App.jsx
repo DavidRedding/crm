@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 // pages
 import Dashboard from './pages/dashboard/Dashboard';
@@ -10,33 +10,31 @@ import Project from './pages/project/Project';
 // components
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
+import { useAuthContext } from './hooks/useAuthContext';
 
-const App = () => (
-  <div className="flex font-poppins">
-    <Router>
-      <Sidebar />
-      <div className="bg-var-bg px-14 grow">
-        <Navbar />
-        <Switch>
-          <Route exact path="/">
-            <Dashboard />
-          </Route>
-          <Route path="/create">
-            <Create />
-          </Route>
-          <Route path="/project/:id">
-            <Project />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/signup">
-            <Signup />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-  </div>
-);
+const App = () => {
+  const { user, authIsReady } = useAuthContext();
+  console.log(user);
+  // prettier-ignore
+  return (
+    <div className="flex font-poppins">
+      {authIsReady && (
+        <Router>
+          <Sidebar />
+          <div className="bg-var-bg px-14 grow">
+            <Navbar user={user} />
+            <Switch>
+              <Route exact path="/">{user ? <Dashboard /> : <Redirect to="/login" />} </Route>
+              <Route path="/create">{user ? <Create /> : <Redirect to="/login" />}</Route>
+              <Route path="/project/:id">{user ? <Project /> : <Redirect to="/login" />}</Route>
+              <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
+              <Route path="/signup">{user ? <Redirect to="/" /> : <Signup />}</Route>
+            </Switch>
+          </div>
+        </Router>
+      )}
+    </div>
+  );
+};
 
 export default App;
