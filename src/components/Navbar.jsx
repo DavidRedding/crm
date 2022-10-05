@@ -18,15 +18,14 @@ const Navbar = ({ user }) => {
         </li>
 
         {!user && (
-          <li>
-            <Link to="/login">Log in</Link>
-          </li>
-        )}
-
-        {!user && (
-          <li className="ml-3">
-            <Link to="/signup">Sign up</Link>
-          </li>
+          <>
+            <li>
+              <Link to="/login">Log in</Link>
+            </li>
+            <li className="ml-3">
+              <Link to="/signup">Sign up</Link>
+            </li>
+          </>
         )}
 
         {user && (
