@@ -2,18 +2,19 @@ import { NavLink, useLocation } from 'react-router-dom';
 
 import DashboardIcon from '../assets/dashboard_icon.svg';
 import AddIcon from '../assets/add_icon.svg';
+import Avatar from './Avatar';
 
-const Sidebar = () => {
+const Sidebar = ({ user }) => {
   const path = useLocation().pathname;
   return (
     <div className="w-[300px] min-w-[300px] bg-var-prim min-h-screen relative text-white">
       <div className="fixed w-[300px] min-w-[300px]">
         <div className="py-10 font-bold text-center border-b border-gray-200 px-7 ">
-          {/* <img src="AVATAR" alt="" /> */}
-          <p>Hey user</p>
+          <Avatar src={user.photoURL} />
+          <p>Hey {user.displayName}</p>
         </div>
 
-        <nav className="mt-20 ml-5">
+        <nav className="mt-16 ml-5">
           <ul>
             <li className="mt-2">
               <NavLink exact to="/" className="flex w-full p-2" activeClassName="text-[#555] bg-var-bg rounded-l-3xl">

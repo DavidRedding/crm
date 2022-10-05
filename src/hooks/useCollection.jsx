@@ -36,7 +36,7 @@ const useCollection = (collection, _query, _orderBy) => {
     return () => unsubscribe();
   }, [collection, query, orderBy]);
 
-  return { documents, error, orderBy };
+  return { documents, error };
 };
 
 export default useCollection;

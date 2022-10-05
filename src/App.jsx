@@ -19,7 +19,7 @@ const App = () => {
     <div className="flex font-poppins">
       {authIsReady && (
         <Router>
-          {user && <Sidebar />}
+          {user && <Sidebar user={user}/>}
           <div className="min-h-screen bg-var-bg px-14 grow">
             <Navbar user={user} />
             <Switch>
