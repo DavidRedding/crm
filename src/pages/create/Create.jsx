@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import Select from 'react-select';
 import useCollection from '../../hooks/useCollection';
+import useDb from '../../hooks/useDb';
 import { timestamp, auth } from '../../firebase/config';
 
 const categories = [
@@ -11,6 +14,9 @@ const categories = [
 ];
 
 const Create = () => {
+  let history = useHistory();
+  const { res, addDocument } = useDb('projects');
+
   const { documents } = useCollection('users');
   const [users, setUsers] = useState([]);
 
@@ -28,7 +34,7 @@ const Create = () => {
     }
   }, [documents]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setFormError(null);
 
@@ -64,8 +70,12 @@ const Create = () => {
       assignedUsersList,
     };
 
-    // console.log({ name, details, dueDate, category, assignedUsers });
-    console.log(project);
+    await addDocument(project);
+
+    if (!res.error) {
+      history.push('/');
+      console.log(`success`);
+    }
   };
 
   return (

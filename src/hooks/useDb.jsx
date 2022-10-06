@@ -1,4 +1,4 @@
-import { useReducer, useState } from 'react';
+import { useReducer, useState, useEffect } from 'react';
 import { db, timestamp } from '../firebase/config';
 
 let initialState = {
@@ -8,7 +8,7 @@ let initialState = {
   success: null,
 };
 
-const firestoreReducer = () => {
+const firestoreReducer = (state, action) => {
   switch (action.type) {
     case 'IS_PENDING':
       return { document: null, isPending: true, error: null, success: null };
