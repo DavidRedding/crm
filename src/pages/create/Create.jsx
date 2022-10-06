@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import useCollection from '../../hooks/useCollection';
+import { timestamp, auth } from '../../firebase/config';
 
 const categories = [
   { value: 'development', label: 'Development' },
@@ -41,7 +42,30 @@ const Create = () => {
       return;
     }
 
-    console.log({ name, details, dueDate, category, assignedUsers });
+    const createdBy = {
+      displayName: auth.currentUser.displayName,
+      photoURL: auth.currentUser.photoURL,
+      id: auth.currentUser.uid,
+    };
+
+    const assignedUsersList = assignedUsers.map((u) => ({
+      displayName: u.value.displayName,
+      photoURL: u.value.photoURL,
+      id: u.value.id,
+    }));
+
+    const project = {
+      name,
+      details,
+      category: category.value,
+      dueDate: timestamp.fromDate(new Date(dueDate)),
+      comments: [],
+      createdBy,
+      assignedUsersList,
+    };
+
+    // console.log({ name, details, dueDate, category, assignedUsers });
+    console.log(project);
   };
 
   return (
