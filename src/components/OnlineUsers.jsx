@@ -10,6 +10,7 @@ const OnlineUsers = () => {
       {documents &&
         documents.map((user) => (
           <div key={user.id} className="flex items-center justify-end space-x-3 text-xl">
+            {user.online && <div className="w-3 h-3  bg-green-500 rounded-[50%]" />}
             <span>{user.displayName}</span>
             <Avatar src={user.photoURL} />
           </div>
