@@ -1,15 +1,47 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Select from 'react-select';
+import useCollection from '../../hooks/useCollection';
+
+const categories = [
+  { value: 'development', label: 'Development' },
+  { value: 'design', label: 'Design' },
+  { value: 'sales', label: 'Sales' },
+  { value: 'marketing', label: 'Marketing' },
+];
 
 const Create = () => {
+  const { documents } = useCollection('users');
+  const [users, setUsers] = useState([]);
+
   const [name, setName] = useState('');
   const [details, setDetails] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [category, setCategory] = useState('');
-  const [assignUsers, setAssignUsers] = useState([]);
+  const [assignedUsers, setAssignedUsers] = useState([]);
+  const [formError, setFormError] = useState(null);
+
+  useEffect(() => {
+    if (documents) {
+      const options = documents.map((user) => ({ value: user, label: user.displayName }));
+      setUsers(options);
+    }
+  }, [documents]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ name, details, dueDate });
+    setFormError(null);
+
+    if (!category) {
+      setFormError('Please select a project category');
+      return;
+    }
+
+    if (assignedUsers.length < 1) {
+      setFormError('Please select one or more users');
+      return;
+    }
+
+    console.log({ name, details, dueDate, category, assignedUsers });
   };
 
   return (
@@ -49,15 +81,19 @@ const Create = () => {
 
       <label className="space-y-2 ">
         <div className="text-xl">Project category:</div>
+        <Select onChange={(option) => setCategory(option)} options={categories} />
       </label>
 
-      <label className="space-y-2 ">
+      <label className="space-y-2">
         <div className="text-xl">Assign to:</div>
+        <Select isMulti onChange={(option) => setAssignedUsers(option)} options={users} />
       </label>
 
-      <button className="w-1/5 p-2 bg-white border rounded-sm text-md border-var-prim text-var-prim hover:text-white hover:bg-var-prim">
+      <button className="w-1/5 p-2 bg-white border rounded-md text-md border-var-prim text-var-prim hover:text-white hover:bg-var-prim">
         Add Project
       </button>
+
+      {formError && <span className="font-semibold text-red-500">{formError}</span>}
     </form>
   );
 };
