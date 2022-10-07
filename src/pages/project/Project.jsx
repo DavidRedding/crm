@@ -21,9 +21,9 @@ const Project = () => {
   }
 
   return (
-    <div className="flex space-x-12">
+    <div className="flex space-x-16">
       <ProjectSummary doc={doc} />
-      <ProjectComments />
+      <ProjectComments id={id} doc={doc} />
     </div>
   );
 };

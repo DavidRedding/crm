@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import { auth, timestamp } from '../../firebase/config';
+import useDb from '../../hooks/useDb';
 
-const ProjectComments = () => {
+const ProjectComments = ({ id, doc }) => {
+  const { updateDocument, res } = useDb('projects');
+
   const [newComment, setNewComment] = useState('');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -14,10 +18,15 @@ const ProjectComments = () => {
       id: Math.random(),
     };
 
-    console.log(commentToAdd);
+    await updateDocument(id, { comments: [...doc.comments, commentToAdd] });
+
+    if (!res.error) {
+      setNewComment('');
+    }
   };
+
   return (
-    <form onSubmit={handleSubmit} className="w-4/12 ">
+    <form onSubmit={handleSubmit} className="w-[40%] ">
       <h4 className="mb-6 font-bold">Project Comments</h4>
 
       <label>
@@ -30,7 +39,7 @@ const ProjectComments = () => {
         />
       </label>
 
-      <button className="px-2 block p-1  bg-white border rounded-[.25rem] text-var-prim border-var-prim hover:text-white hover:bg-var-prim">
+      <button className="px-2 text-sm block p-1 bg-white border rounded-[.25rem] text-var-prim border-var-prim hover:text-white hover:bg-var-prim">
         Add Comment
       </button>
     </form>
