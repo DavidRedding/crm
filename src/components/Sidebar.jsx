@@ -10,7 +10,7 @@ const Sidebar = ({ user }) => {
     <div className="relative hidden min-h-screen text-white w-52 tablet:block bg-var-prim">
       <div className="w-52 ">
         <div className="pb-8 font-bold text-center border-b border-gray-200 p-7 ">
-          <Avatar src={user.photoURL} className />
+          <Avatar src={user.photoURL} />
           <p className="mt-1">Hey {user.displayName}</p>
         </div>
 

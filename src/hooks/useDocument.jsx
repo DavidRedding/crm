@@ -10,15 +10,20 @@ const useDocument = (collection, id) => {
 
     const unsub = ref.onSnapshot(
       (snapshot) => {
-        setDoc({ ...snapshot.data(), id: snapshot.id });
-        setError(null);
+        if (snapshot.data()) {
+          setDoc({ ...snapshot.data(), id: snapshot.id });
+          setError(null);
+        } else {
+          setError('No such document exists');
+        }
       },
-      (error) => {
-        console.log(error.message);
-        setError(`failed to load document`);
+      (err) => {
+        console.log(err.message);
+        setError('failed to get document');
       }
     );
 
+    // unsub on unmount
     return () => unsub();
   }, [collection, id]);
 
