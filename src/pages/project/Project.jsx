@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import useDocument from '../../hooks/useDocument';
 import ReactLoading from 'react-loading';
 import ProjectSummary from './ProjectSummary';
+import ProjectComments from './ProjectComments';
 
 const Project = () => {
   const { id } = useParams();
@@ -19,7 +20,12 @@ const Project = () => {
     );
   }
 
-  return <div>{doc && <ProjectSummary doc={doc} />}</div>;
+  return (
+    <div className="flex space-x-12">
+      <ProjectSummary doc={doc} />
+      <ProjectComments />
+    </div>
+  );
 };
 
 export default Project;
