@@ -7,14 +7,14 @@ import Avatar from './Avatar';
 const Sidebar = ({ user }) => {
   const path = useLocation().pathname;
   return (
-    <div className="relative min-h-screen text-white w-72 bg-var-prim">
-      <div className="fixed w-72">
-        <div className="py-10 font-bold text-center border-b border-gray-200 px-7 ">
-          <Avatar src={user.photoURL} />
-          <p>Hey {user.displayName}</p>
+    <div className="relative hidden min-h-screen text-white w-52 tablet:block bg-var-prim">
+      <div className="w-52 ">
+        <div className="pb-8 font-bold text-center border-b border-gray-200 p-7 ">
+          <Avatar src={user.photoURL} className />
+          <p className="mt-1">Hey {user.displayName}</p>
         </div>
 
-        <nav className="mt-16 ml-5">
+        <nav className="mt-16 ml-5 ">
           <ul>
             <li className="mt-2">
               <NavLink exact to="/" className="flex w-full p-2" activeClassName="text-[#555] bg-var-bg rounded-l-3xl">

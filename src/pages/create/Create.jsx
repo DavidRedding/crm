@@ -79,11 +79,11 @@ const Create = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col max-w-xl mx-auto space-y-5">
-      <h1 className="mb-4 text-xl font-semibold">Create a new project</h1>
+    <form onSubmit={handleSubmit} className="flex flex-col max-w-xl mx-auto ">
+      <h1 className="mb-8 text-lg font-semibold">Create a new project</h1>
 
-      <label className="space-y-2 ">
-        <div className="text-xl">Project name:</div>
+      <label className="mb-5 space-y-2 ">
+        <div className="text-md">Project name:</div>
         <input
           value={name}
           required
@@ -94,8 +94,8 @@ const Create = () => {
         />
       </label>
 
-      <label className="space-y-2 ">
-        <div className="text-xl">Project details:</div>
+      <label className="mb-5 space-y-2 ">
+        <div className="text-md">Project details:</div>
         <textarea
           value={details}
           required
@@ -108,22 +108,22 @@ const Create = () => {
         />
       </label>
 
-      <label className="space-y-2 ">
-        <div required="text-xl">Due date:</div>
+      <label className="mb-5 space-y-2 ">
+        <div required="text-md">Due date:</div>
         <input value={dueDate} onChange={(e) => setDueDate(e.target.value)} type="date" className="w-full p-1" />
       </label>
 
-      <label className="space-y-2 ">
-        <div className="text-xl">Project category:</div>
+      <label className="mb-5 space-y-2 ">
+        <div className="text-md">Project category:</div>
         <Select onChange={(option) => setCategory(option)} options={categories} />
       </label>
 
-      <label className="space-y-2">
-        <div className="text-xl">Assign to:</div>
+      <label className="mb-5 space-y-2">
+        <div className="text-md">Assign to:</div>
         <Select isMulti onChange={(option) => setAssignedUsers(option)} options={users} />
       </label>
 
-      <button className="w-1/5 p-2 bg-white border rounded-md text-md border-var-prim text-var-prim hover:text-white hover:bg-var-prim">
+      <button className="w-1/5 p-2 mt-3 bg-white border rounded-md text-md border-var-prim text-var-prim hover:text-white hover:bg-var-prim">
         Add Project
       </button>
 

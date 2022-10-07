@@ -21,7 +21,7 @@ const App = () => {
       {authIsReady && (
         <Router>
           {user && <Sidebar user={user}/>}
-          <div className="min-h-screen bg-var-bg px-14 grow">
+          <div className="min-h-screen px-5 tablet:px-8 laptop:px-12 bg-var-bg grow">
             <Navbar user={user} />
             <Switch>
               <Route exact path="/">{user ? <Dashboard /> : <Redirect to="/login" />} </Route>
