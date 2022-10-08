@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Avatar from '../../components/Avatar';
 import { auth, timestamp } from '../../firebase/config';
 import useDb from '../../hooks/useDb';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 const ProjectComments = ({ id, doc }) => {
   const { updateDocument, res } = useDb('projects');
@@ -38,7 +38,9 @@ const ProjectComments = ({ id, doc }) => {
                 <img className="w-8 h-8 rounded-[50%]" src={comment.photoURL} />
                 <p>{comment.displayName}</p>
               </div>
-              <p className="my-2 text-[#777]">{comment.createdAt.toDate().toDateString()}</p>
+              <p className="my-2 text-[#777]">
+                {formatDistanceToNow(comment.createdAt.toDate(), { addSuffix: true })}{' '}
+              </p>
               <p className="text-[#777]">{comment.content}</p>
             </li>
           ))}
