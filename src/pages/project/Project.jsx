@@ -22,7 +22,7 @@ const Project = () => {
 
   return (
     <div className="pb-6 laptop:grid-cols-5 laptop:grid laptop:gap-16 ">
-      <ProjectSummary doc={doc} />
+      <ProjectSummary project={doc} id={id} />
       <ProjectComments id={id} doc={doc} />
     </div>
   );
