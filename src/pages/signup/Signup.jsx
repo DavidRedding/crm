@@ -19,8 +19,8 @@ const Signup = () => {
       return;
     }
 
-    if (selected.size > 300000) {
-      setThumbnailError('File size may not exceed 300KB');
+    if (selected.size > 500000) {
+      setThumbnailError('File size may not exceed 500KB');
       return;
     }
     setThumbnailError(null);
